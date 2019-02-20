@@ -1,11 +1,13 @@
 // Fill out your copyright notice in the Description page of Project Settings.
 
 #pragma once
-//#include "Engine/World.h"
-#include "Tank.h"
+
 #include "CoreMinimal.h"
 #include "AIController.h"
 #include "TankAIController.generated.h"
+
+//Forward Declaration
+class ATank;
 
 /**
  * 
@@ -17,16 +19,11 @@ class TANKWARS_API ATankAIController : public AAIController
 	
 private:
 
-	ATank* GetAIControlledTank() const;
-
 	virtual void BeginPlay() override;
 
-	virtual void Tick(float DeltaTime) override;
+	virtual void Tick(float DeltaSeconds) override;
 
-	void PrintAIControlledTank();
-	void PrintPlayerControlledTank();
+	ATank* GetControlledTank() const;
 
-	ATank* GetPlayerControlledTank() const;
-
-	void AimTowardsPlayer();
+	ATank* GetPlayerTank() const;
 };
