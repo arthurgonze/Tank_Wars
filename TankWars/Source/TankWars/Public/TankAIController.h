@@ -6,9 +6,6 @@
 #include "AIController.h"
 #include "TankAIController.generated.h"
 
-//Forward Declaration
-class ATank;
-
 /**
  * 
  */
@@ -22,8 +19,4 @@ private:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
-
-	ATank* GetControlledTank() const;
-
-	ATank* GetPlayerTank() const;
 };
