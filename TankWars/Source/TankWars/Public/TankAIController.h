@@ -15,6 +15,8 @@ class TANKWARS_API ATankAIController : public AAIController
 	GENERATED_BODY()
 	
 private:
+	//how close the AI tank get to the player
+	float AcceptanceRadius = 1000;
 
 	virtual void BeginPlay() override;
 
