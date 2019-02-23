@@ -30,12 +30,6 @@ class TANKWARS_API UTankAimingComponent : public UActorComponent
 public:	
 	void AimAt(FVector HitLocation, float LaunchSpeed);
 	
-	/*TODO REMOVED NOW
-	void SetBarrelReference(UTankBarrel* BarrelToSet);
-	void SetTurretReference(UTankTurret* TurretToSet);
-	*/
-	
-	//TODO ADDED NOW
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
