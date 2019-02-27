@@ -6,7 +6,7 @@
 #include "Components/ActorComponent.h"
 #include "TankAimingComponent.generated.h"
 
-//Enum for aiming state
+// Enum for aiming state
 UENUM()
 enum class EFiringState : uint8
 {
@@ -15,35 +15,61 @@ enum class EFiringState : uint8
 	Locked
 };
 
-//TODO time to reload in UI
-
-//Forward Declaration
-class UTankBarrel; 
+// Forward Declaration
+class UTankBarrel;
 class UTankTurret;
+class AProjectile;
 
-//Hold barrels propertys and Elevate method
+// Holds barrel's properties and Elevate method
 UCLASS(ClassGroup = (Custom), meta = (BlueprintSpawnableComponent))
 class TANKWARS_API UTankAimingComponent : public UActorComponent
 {
 	GENERATED_BODY()
 
-public:	
-	void AimAt(FVector HitLocation, float LaunchSpeed);
-	
+public:
 	UFUNCTION(BlueprintCallable, Category = "Setup")
 	void Initialise(UTankBarrel* BarrelToSet, UTankTurret* TurretToSet);
 
+	void AimAt(FVector HitLocation);
+
+	UFUNCTION(BlueprintCallable, Category = "Firing")
+	void Fire();
+
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
-	EFiringState FiringStatus = EFiringState::Reloading;
+	EFiringState FiringState = EFiringState::Reloading;
+
+	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly, Category = "Firing")
+	float AimPercentage = 0;
 
 private:
+	// Sets default values for this component's properties
+	UTankAimingComponent();
+
 	UTankBarrel* Barrel = nullptr;
 	UTankTurret* Turret = nullptr;
 
+	FVector AimDirection = FVector(0);
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float LaunchSpeed = 4000;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ReloadTimeInSeconds = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	float ToleranceForAiming = 0.01;
+
+	float LastFireTime = 0;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Setup")
+	TSubclassOf<AProjectile> ProjectileBlueprint;
+	
 	void MoveBarrelTowards(FVector AimDirection);
 
-	// Sets default values for this component's properties
-	UTankAimingComponent();
-		
+	virtual void TickComponent(float DeltaTime, enum ELevelTick TickType, FActorComponentTickFunction *ThisTickFunction) override;
+
+	virtual void BeginPlay() override;
+
+	bool IsBarrelMoving();	
 };

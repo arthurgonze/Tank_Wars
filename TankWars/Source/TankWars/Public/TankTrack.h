@@ -14,6 +14,19 @@ class TANKWARS_API UTankTrack : public UStaticMeshComponent
 {
 	GENERATED_BODY()
 	
+private:
+	UTankTrack();
+
+	virtual void BeginPlay() override;
+
+	void ApplySidewaysForce();
+
+	UFUNCTION()
+	void OnHit(UPrimitiveComponent* HitComponent, AActor* OtherActor, UPrimitiveComponent* OtherComponent, FVector NormalImpulse, const FHitResult& Hit);
+
+	void DriveTrack();
+	float CurrentThrottle = 0;
+
 public:
 	//Max force per track in Newtons
 	//A modern medium tank weight is 30-35 tons, so 30000-35000kg, I choosed to be 35000kg the weight of our tank
@@ -25,8 +38,8 @@ public:
 	//F = 27235.5125 Newtons
 	//assuming that value is too slow for a game to be fun and we have a lot of friction I will multiply by 1000
 	UPROPERTY(EditDefaultsOnly)
-	float TrackMaxDrivingForce = 40000000;
+		float TrackMaxDrivingForce = 400000;
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
-	void SetThrottle(float Throttle);
+		void SetThrottle(float Throttle);
 };
