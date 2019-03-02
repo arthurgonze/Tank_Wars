@@ -38,7 +38,7 @@ public:
 	//F = 27235.5125 Newtons
 	//assuming that value is too slow for a game to be fun and we have a lot of friction I will multiply by 1000
 	UPROPERTY(EditDefaultsOnly)
-		float TrackMaxDrivingForce = 400000;
+		float TrackMaxDrivingForce = 40000000;
 
 	UFUNCTION(BlueprintCallable, Category = "Input")
 		void SetThrottle(float Throttle);

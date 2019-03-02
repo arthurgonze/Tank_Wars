@@ -14,10 +14,12 @@ class TANKWARS_API ATankAIController : public AAIController
 {
 	GENERATED_BODY()
 	
-private:
+protected:
 	//how close the AI tank get to the player
-	float AcceptanceRadius = 1000;
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+		float AcceptanceRadius = 80;
 
+private:
 	virtual void BeginPlay() override;
 
 	virtual void Tick(float DeltaSeconds) override;
