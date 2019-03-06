@@ -40,7 +40,7 @@ public:
 	EFiringState GetFiringState() const;
 
 	UFUNCTION(BlueprintCallable, Category = "Firing")
-	int GetRoundsLeft() const;
+	int32 GetRoundsLeft() const;
 
 protected:
 	UPROPERTY(BlueprintReadOnly, Category = "State")
@@ -65,6 +65,9 @@ private:
 	float ReloadTimeInSeconds = 3;
 
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
+	int32 RoundsLeft = 3;
+
+	UPROPERTY(EditDefaultsOnly, Category = "Firing")
 	float ToleranceForAiming = 0.05;
 
 	float LastFireTime = 0;
@@ -79,6 +82,4 @@ private:
 	virtual void BeginPlay() override;
 
 	bool IsBarrelMoving();	
-
-	int RoundsLeft = 3;
 };
