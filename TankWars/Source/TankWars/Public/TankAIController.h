@@ -17,10 +17,15 @@ class TANKWARS_API ATankAIController : public AAIController
 protected:
 	//how close the AI tank get to the player
 	UPROPERTY(EditDefaultsOnly, Category = "Firing")
-		float AcceptanceRadius = 80;
+	float AcceptanceRadius = 80;
 
 private:
 	virtual void BeginPlay() override;
 
+	virtual void SetPawn(APawn* InPawn) override;
+
 	virtual void Tick(float DeltaSeconds) override;
+
+	UFUNCTION()
+	void OnPossessedTankDeath();
 };
