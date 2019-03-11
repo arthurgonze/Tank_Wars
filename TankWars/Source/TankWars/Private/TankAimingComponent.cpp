@@ -49,7 +49,7 @@ void UTankAimingComponent::TickComponent(float DeltaTime, enum ELevelTick TickTy
 
 void UTankAimingComponent::BeginPlay()
 {
-	//Super::BeginPlay();
+	Super::BeginPlay();
 
 	//So that first fire is after initial reload 
 	LastFireTime = GetWorld()->GetTimeSeconds();
